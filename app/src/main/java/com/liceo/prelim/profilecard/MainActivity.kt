@@ -19,7 +19,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.liceo.prelim.profilecard.ui.theme.ProfileCardLabTheme
 
 class MainActivity : ComponentActivity() {
@@ -56,7 +55,7 @@ fun GroceryListApp() {
                             Icon(
                                 Icons.Default.DeleteSweep,
                                 contentDescription = "Clear All",
-                                tint = MaterialTheme.colorScheme.error
+                                tint = MaterialTheme.colorScheme.error,
                             )
                         }
                     }
@@ -161,10 +160,9 @@ fun GroceryListApp() {
                     contentPadding = PaddingValues(bottom = 16.dp)
                 ) {
                     items(groceries) { item ->
-                        GroceryItemRow(
-                            item = item,
-                            onDelete = { groceries.remove(item) }
-                        )
+                        GroceryItemRow(item = item) {
+                            groceries.remove(item)
+                        }
                     }
                 }
             }
