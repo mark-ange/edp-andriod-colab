@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Class
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material.icons.filled.School
@@ -71,6 +72,7 @@ fun ProfileScreen(
                     )
                 },
                 actions = {
+                    // Theme Toggle Switch in TopBar
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
                         modifier = Modifier.padding(end = 8.dp)
@@ -102,7 +104,7 @@ fun ProfileScreen(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { },
+                onClick = { /* TODO: Add action */ },
                 containerColor = MaterialTheme.colorScheme.primary,
                 contentColor = MaterialTheme.colorScheme.onPrimary
             ) {
@@ -127,6 +129,7 @@ fun ProfileScreen(
             ) {
                 Spacer(modifier = Modifier.height(24.dp))
 
+                // Task 2: Circular avatar with instructions-compliant border & badge
                 Box(contentAlignment = Alignment.BottomEnd) {
                     Box(
                         modifier = Modifier
@@ -147,6 +150,7 @@ fun ProfileScreen(
                             contentScale = ContentScale.Crop
                         )
                     }
+                    // Status Badge
                     Surface(
                         modifier = Modifier
                             .size(24.dp)
@@ -162,6 +166,7 @@ fun ProfileScreen(
 
                 Spacer(modifier = Modifier.height(16.dp))
 
+                // Task 3: Full Name & Subtitle
                 Text(
                     text = "Abellano, Mark Angelou",
                     style = MaterialTheme.typography.headlineSmall,
@@ -179,6 +184,7 @@ fun ProfileScreen(
 
                 Spacer(modifier = Modifier.height(32.dp))
 
+                // Task 4: The Info Card
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -227,6 +233,7 @@ fun ProfileScreen(
     }
 }
 
+// Task 5: Reusable InfoRow Component
 @Composable
 fun InfoRow(
     icon: ImageVector,
@@ -237,7 +244,7 @@ fun InfoRow(
         modifier = Modifier
             .fillMaxWidth()
             .clip(MaterialTheme.shapes.medium)
-            .clickable { }
+            .clickable { /* Stretch Goal */ }
             .padding(vertical = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -277,6 +284,7 @@ fun InfoRow(
     }
 }
 
+// Task 6: Previews
 @Preview(showBackground = true, name = "Profile - Light")
 @Composable
 fun ProfileLightPreview() {
