@@ -8,7 +8,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import com.liceo.prelim.profilecard.ui.theme.ProfileCardLabTheme
+import com.liceo.prelim.profilecard.ui.theme.ProfileTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
             // State to handle theme switching at runtime
             var isDarkMode by remember { mutableStateOf(false) }
 
-            ProfileCardLabTheme(darkTheme = isDarkMode) {
+            ProfileTheme(darkTheme = isDarkMode) {
                 // Pass the toggle function to the screen
                 ProfileScreen(
                     isDarkMode = isDarkMode,
