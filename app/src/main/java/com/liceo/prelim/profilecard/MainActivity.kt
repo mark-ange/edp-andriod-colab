@@ -4,26 +4,35 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
-import com.liceo.prelim.profilecard.ui.theme.ProfileCardLabTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            // State to handle theme switching at runtime
-            var isDarkMode by remember { mutableStateOf(false) }
+            MaterialTheme {
+                Surface {
+                    val navController = rememberNavController()
 
-            ProfileCardLabTheme(darkTheme = isDarkMode) {
-                // Pass the toggle function to the screen
-                ProfileScreen(
-                    isDarkMode = isDarkMode,
-                    onThemeToggle = { isDarkMode = !isDarkMode }
-                )
+                    NavHost(navController = navController, startDestination = Home) {
+                        composable<Home> {
+                            HomeScreen(onShowGreeting = { typedName ->
+                                navController.navigate(Greeting(userName = typedName))
+                            })
+                        }
+
+                        composable<Greeting> { backStackEntry ->
+                            val greeting: Greeting = backStackEntry.toRoute()
+                            GreetingScreen(userName = greeting.userName)
+                        }
+                    }
+                }
             }
         }
     }
