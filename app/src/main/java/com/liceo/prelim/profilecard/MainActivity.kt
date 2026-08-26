@@ -12,7 +12,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             MaterialTheme {
                 Surface {
-                    ProfileScreen()
+                    RecipeApp() // <-- our whole app starts here
                 }
             }
         }

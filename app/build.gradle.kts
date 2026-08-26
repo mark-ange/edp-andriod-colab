@@ -39,6 +39,8 @@ android {
 
 dependencies {
     val lifecycleVersion = "2.10.0"
+    // Navigation for Compose (Lecture 8)
+    implementation("androidx.navigation:navigation-compose:2.9.8")
     // Lets you call viewModel() inside a Composable
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion")
     // Lets you use collectAsStateWithLifecycle()
