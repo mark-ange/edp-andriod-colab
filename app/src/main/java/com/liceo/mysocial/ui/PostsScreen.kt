@@ -16,6 +16,7 @@ import com.liceo.mysocial.data.Post
 import java.text.SimpleDateFormat
 import java.util.*
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PostsScreen(vm: PostsViewModel) {
 
@@ -23,8 +24,18 @@ fun PostsScreen(vm: PostsViewModel) {
 
     var editing by remember { mutableStateOf<Post?>(null) }
     var showEditor by remember { mutableStateOf(false) }
+    var deleting by remember { mutableStateOf<Post?>(null) }
 
     Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("MySocial (${posts.size} posts)") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primaryContainer,
+                    titleContentColor = MaterialTheme.colorScheme.primary,
+                )
+            )
+        },
         floatingActionButton = {
             FloatingActionButton(onClick = { editing = null; showEditor = true }) {
                 Icon(Icons.Default.Add, contentDescription = "New post")
@@ -45,7 +56,7 @@ fun PostsScreen(vm: PostsViewModel) {
                     PostCard(
                         post = post,
                         onEdit = { editing = post; showEditor = true },
-                        onDelete = { vm.deletePost(post) },
+                        onDelete = { deleting = post },
                     )
                 }
             }
@@ -61,6 +72,27 @@ fun PostsScreen(vm: PostsViewModel) {
                 if (current == null) vm.addPost(newText) else vm.editPost(current, newText)
                 showEditor = false
             },
+        )
+    }
+
+    if (deleting != null) {
+        AlertDialog(
+            onDismissRequest = { deleting = null },
+            title = { Text("Delete post?") },
+            text = { Text("This post will be gone forever.") },
+            confirmButton = {
+                TextButton(onClick = { 
+                    deleting?.let { vm.deletePost(it) }
+                    deleting = null 
+                }) {
+                    Text("Delete", color = MaterialTheme.colorScheme.error)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { deleting = null }) {
+                    Text("Cancel")
+                }
+            }
         )
     }
 }
