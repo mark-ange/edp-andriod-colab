@@ -1,10 +1,11 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
 }
 
 android {
-    namespace = "com.liceo.prelim.profilecard"
+    namespace = "com.liceo.mysocial"
     compileSdk {
         version = release(37) {
             minorApiLevel = 1
@@ -12,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.liceo.prelim.profilecard"
+        applicationId = "com.liceo.mysocial"
         minSdk = 32
         targetSdk = 37
         versionCode = 1
@@ -38,6 +39,13 @@ android {
 }
 
 dependencies {
+    val room = "2.8.4"
+    implementation("androidx.room:room-runtime:$room")
+    implementation("androidx.room:room-ktx:$room")
+    ksp("androidx.room:room-compiler:$room")
+
+    implementation("androidx.datastore:datastore-preferences:1.2.1")
+
     val lifecycleVersion = "2.10.0"
     // Navigation for Compose (Lecture 8)
     implementation("androidx.navigation:navigation-compose:2.9.8")
