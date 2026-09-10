@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -28,7 +29,12 @@ class MainActivity : ComponentActivity() {
             val darkTheme by themeVm.isDarkTheme.collectAsStateWithLifecycle()
 
             MySocialTheme(darkTheme = darkTheme, dynamicColor = false) {
-                MySocialApp(postsVm, themeVm)
+                Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    MySocialApp(postsVm, themeVm)
+                }
             }
         }
     }
